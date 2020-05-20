@@ -1,0 +1,11 @@
+1/
+Khi sử dụng malloc() thì trên hệ điều hành Linux luôn trả về địa chỉ chia hết cho 8 hoặc 16.
+Vì thế, khi chúng ta muốn địa chỉ trả về chia hết cho số khác 8 hoặc 16 thì ta sẽ dùng aligned_malloc().
+
+2/
+Muốn tăng kích thước của heap trong một process thì:
+	- Khi muốn allocate, ta cần sử dụng các hàm malloc(), calloc().
+	- Khi muốn deallocate, ta cần sử dụng hàm free().
+	- Ta cũng có thể sử dụng các system call như brk() và sbrk().
+Như vậy, chúng ta có thể quản lý bộ nhớ của Heap một cách linh hoạt hơn.
+	

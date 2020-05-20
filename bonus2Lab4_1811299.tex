@@ -1,0 +1,163 @@
+\documentclass[a4paper]{article}
+
+\usepackage{vntex}
+\usepackage{a4wide,amssymb,epsfig,latexsym,array,hhline,fancyhdr}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol,longtable,amscd}
+\usepackage{diagbox}%Make diagonal lines in tables
+\usepackage{booktabs}
+\usepackage{alltt}
+\usepackage[framemethod=tikz]{mdframed}% For highlighting paragraph backgrounds
+\usepackage{caption,subcaption}
+\usepackage{lastpage}
+\usepackage[lined,boxed,commentsnumbered]{algorithm2e}
+\usepackage{enumerate}
+\usepackage{color}
+\usepackage{graphicx}% Standard graphics package
+\usepackage{array}
+\usepackage{tabularx, caption}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage{rotating}
+\usepackage{graphics}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{epsfig}
+\usepackage{tikz}
+\usetikzlibrary{arrows,snakes,backgrounds}
+\usepackage[unicode]{hyperref}
+\hypersetup{urlcolor=blue,linkcolor=black,citecolor=black,colorlinks=true} 
+\setlength{\headheight}{40pt}
+\pagestyle{fancy}
+\fancyhead{} % clear all header fields
+\fancyhead[L]{
+	\begin{tabular}{rl}
+		\begin{picture}(25,15)(0,0)
+		\put(0,-8){\includegraphics[width=8mm, height=8mm]{Images/hcmut.png}}
+		%\put(0,-8){\epsfig{width=10mm,figure=hcmut.eps}}
+		\end{picture}&
+		%\includegraphics[width=8mm, height=8mm]{hcmut.png} & %
+		\begin{tabular}{l}
+			\textbf{\bf \ttfamily Trường Đại Học Bách Khoa Tp.Hồ Chí Minh}\\
+			\textbf{\bf \ttfamily Khoa Khoa Học và Kỹ Thuật Máy Tính}
+		\end{tabular} 	
+	\end{tabular}
+}
+\fancyhead[R]{
+	\begin{tabular}{l}
+		\tiny \bf \\
+		\tiny \bf 
+\end{tabular}  }
+\fancyfoot{} % clear all footer fields
+\fancyfoot[L]{\scriptsize \ttfamily Bài tìm hiểu về WSL2 - Hệ điều hành(Thí nghiệm) - Niên khóa 2019-2020}
+\fancyfoot[R]{\scriptsize \ttfamily Trang {\thepage}/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+
+%%%
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+\makeatletter
+\newcounter {subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection .\@alph\c@subsubsubsection}
+\newcommand\subsubsubsection{\@startsection{subsubsubsection}{4}{\z@}%
+	{-3.25ex\@plus -1ex \@minus -.2ex}%
+	{1.5ex \@plus .2ex}%
+	{\normalfont\normalsize\bfseries}}
+\newcommand*\l@subsubsubsection{\@dottedtocline{3}{10.0em}{4.1em}}
+\newcommand*{\subsubsubsectionmark}[1]{}
+\makeatother
+
+\everymath{\color{blue}}%make in-line maths symbols blue to read/check easily
+
+\sloppy
+\captionsetup[figure]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=-9pt}
+\captionsetup[table]{labelfont={small,bf},textfont={small,it},belowskip=-1pt,aboveskip=7pt}
+\setlength{\floatsep}{5pt plus 2pt minus 2pt}
+\setlength{\textfloatsep}{5pt plus 2pt minus 2pt}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+\begin{document}
+	
+	\begin{titlepage}
+		\begin{center}
+			ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH \\
+			TRƯỜNG ĐẠI HỌC BÁCH KHOA \\
+			KHOA KHOA HỌC - KỸ THUẬT MÁY TÍNH 
+		\end{center}
+		
+		\vspace{1cm}
+		
+		\begin{figure}[h!]
+			\begin{center}
+				\includegraphics[width=3cm]{Images/hcmut.png}
+			\end{center}
+		\end{figure}
+		
+		\vspace{1cm}
+		
+		
+		\begin{center}
+			\begin{tabular}{c}
+				\multicolumn{1}{l}{\textbf{{\Large Hệ điều hành(Thí nghiệm)}}}\\
+				~~\\
+				\hline
+				\\
+				\textbf{{\Huge Bonus2Lab4 - Tìm hiểu về Git}}\\
+				\\
+				\hline
+			\end{tabular}
+		\end{center}
+		
+		\vspace{1.5cm}
+		
+		\begin{table}[h]
+			\begin{tabular}{rrl}
+				& SV thực hiện: & Nguyễn Phạm Minh Trí -- 1811299 \\
+			\end{tabular}
+		\end{table}
+		\vspace{1.5cm}
+		\begin{center}
+			{\footnotesize Tp. Hồ Chí Minh, Tháng 05/2020}
+		\end{center}
+	\end{titlepage}
+	
+	\newpage
+	\tableofcontents
+	\newpage
+	
+	\section{Lịch sử ra đời}
+	\textbf{Khi ta bắt tay vào code thì sau mỗi ngày lại có thêm ít nhiều sự thay đổi các files làm việc. Do đó, để phục vụ cho nhu cầu kiểm soát dòng chảy công việc, các Version Control System(VCS) đã ra đời.}
+	\\
+	\begin{itemize}
+		\item VCS sẽ lưu trữ tất cả các files trong dự án và ghi lại toàn bộ lịch sử thay đổi, mỗi sự thay đổi đươc lưu lại sẽ hình thành một phiên bản.
+		\item Ta có thể xem lại danh sách sự thay đổi của files như xem một timeline các version, gồm: nội dung file, ngày giờ, người thay đổi và lý do.
+		\item Có nhiều phiên bản VCS khác nhau như:
+		\begin{itemize}
+			\item Local Version Control System
+			\item CVSC - Centralized Version Control System.
+			\item DVCS - Distributed Version Control System.
+		\end{itemize}
+	\end{itemize}
+	\textbf{Và Git chính là một hệ thống VCS (thuộc loại DVCS). Ra đời vào năm 2005 bởi Linus Torvalds, một nhà sáng chế nổi tiếng của nhân Linux.}
+
+	\newpage
+	\section{Định nghĩa/mô tả}
+	\textbf{Để hiểu rõ hơn về Git, ta hãy cùng xem nội dung phía dưới nhé}
+	\\
+	\begin{itemize}
+		\item Git quản lý các files theo cách phân nhánh (branching). Do đó, ta sẽ loại trừ được phần đa các trường hợp không mong muốn phát sinh từ các lỗi thuộc về con người.
+		\item Git có working flow khác với các hệ thống khác ở chỗ, quản lý thông tin lưu trữ. Các hệ thống khác thường chỉ quan tâm tới sự thay đổi các files, còn Git thì sẽ "chụp" lại để tạo ra một snapshot tham chiếu tới khi commit thành công.
+		\item Một số lệnh Git cơ bản
+		\begin{itemize}
+			\item git config - thiết lập username và email trong main configuration file.
+			\item git init - khởi tạo 1 git repository của 1 project mới hoặc đã có.
+			\item git clone - copy 1 git repository từ remote source.
+			\item git status - kiểm tra trạng thái của các files đang làm việc.
+			\item git add - thêm thay đổi đến stage/index trong working directory.
+			\item git commit - tạo ra 1 snapshot các thay đổi trong working directory.
+		\end{itemize}
+	\end{itemize}
+	\textbf{Em đã tạo 1 repository của Lab4OS qua URL sau:}
+\end{document}

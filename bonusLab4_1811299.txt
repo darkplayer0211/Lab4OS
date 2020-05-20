@@ -1,0 +1,7 @@
+_Trong Linux, bản cập nhật Kernel vào tháng 6 năm 2001, dự án Linux PaX lần đầu đề xuất thuật ngữ ASLR.
+_ALSR là một kỹ thuật bảo vệ máy tính bao gồm chống xâm nhập lỗ hổng bộ nhớ Memory. 
+Để ngăn chặn tấn công máy tính qua việc trỏ tới vùng nhớ của function, ASLR sắp xếp ngẫu nhiên vùng địa
+chỉ của các khu vực dữ liệu quan trọng của một process, gồm đoạn mã executable và các vị trí bắt đầu stack,
+heap và các thư viện libraries.
+_random brk offset, random stack offset và random mmap offset đều có tác dụng giống nhau, đều thuộc kỹ thuật 
+ASLR. 
